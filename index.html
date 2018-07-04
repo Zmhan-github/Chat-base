@@ -15,14 +15,14 @@
             <header class="header">
                 <img src="img/logo.png" alt="logo chat" class="logo">
                 
-                <form action="#" class="search">
+                <!-- <form action="#" class="search">
                     <input type="text" class="search__input" placeholder="Поиск в чате">
                     <button class="search__button">
                         <svg class="search__icon">
                             <use xlink:href="img/sprite.svg#icon-magnifying-glass"></use>
                         </svg>
                     </button>
-                </form>
+                </form> -->
  
                 <nav class="user-nav">
                     <div class="user-nav__icon-box">
@@ -46,40 +46,14 @@
             <div class="content">
                 <nav class="sidebar">
                     <form action="#" class="search">
-                        <input type="text" class="search__input" placeholder="Поиск в чате">
+                        <input id="search" type="text" class="search__input" placeholder="Поиск в чате">
                         <button class="search__button">
                             <svg class="search__icon">
                                 <use xlink:href="img/sprite.svg#icon-magnifying-glass"></use>
                             </svg>
                         </button>
                     </form>
-                    <ul class="side-nav" class="scrollbar">
-                        <li class="side-nav__item">
-                            <a href="#" class="side-nav__link">
-                                <img src="img/user-2.jpg" alt="User photo" class="side-nav__user-photo">
-                                <span>Лиза</span>
-                            </a>
-                        </li>
-                        <li class="side-nav__item">
-                            <a href="#" class="side-nav__link">
-                                <img src="img/user-3.jpg" alt="User photo" class="side-nav__user-photo">
-                                <span>Тимур</span>
-                            </a>
-                        </li>  
-                        <li class="side-nav__item">
-                            <a href="#" class="side-nav__link">
-                                <img src="img/user-1.jpg" alt="User photo" class="side-nav__user-photo">
-                                <span>Марат</span>
-                            </a>
-                        </li>  
-                        <li class="side-nav__item">
-                            <a href="#" class="side-nav__link">
-                                <img src="img/user-5.jpg" alt="User photo" class="side-nav__user-photo">
-                                <span>Влад</span>
-                            </a>
-                        </li>       
-                    </ul>
-
+                    <ul class="side-nav"></ul>
                     <div class="legal">
                         &copy; 2018 by Chat-App.
                     </div>
@@ -99,6 +73,8 @@
                 </main>
             </div>
         </div>
+        <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="itemFor.js"></script>
         <script src="main.js"></script>
     </body>
 </html>

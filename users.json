@@ -1,0 +1,37 @@
+[
+  {
+    "name":"Джесика",
+    "images":"user-2.jpg",
+    "status":"online"
+  },
+  {
+    "name":"Марат",
+    "images":"user-1.jpg",
+    "status":"online"
+  },
+  {
+    "name":"Тимур",
+    "images":"user-3.jpg",
+    "status": "online"
+  },
+  {
+    "name":"Осман",
+    "images":"user-4.jpg",
+    "status":"online"
+  },
+  {
+    "name":"Аврора",
+    "images":"user-5.jpg",
+    "status": "online"
+  },
+  {
+    "name":"Воланд",
+    "images":"user-5.jpg",
+    "status": "online"
+  },
+  {
+    "name":"Мастер",
+    "images":"user-5.jpg",
+    "status": "online"
+  }
+]
