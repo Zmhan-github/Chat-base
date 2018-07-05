@@ -13,7 +13,7 @@ var view = {
     var el = document.getElementById("scrollbar");
     el.insertAdjacentHTML('beforeend', `
     <div class="message-wrapper">
-      <img src="img/user.jpg" alt="User photo" class="message-wrapper__user-photo">
+      <img src="img/${data.image}" alt="User photo" class="message-wrapper__user-photo">
       <div class="message-wrapper__text-box">
         <span class="message-wrapper__user-name">${data.name}</span>
         <p class="message-wrapper__paragraph">${data.message}</p>
@@ -32,24 +32,49 @@ var model = {
     id: 123456789,
     name: "",
     message: "",
+    image: '',
   },
 
   ws: function(msg, ws){ 
     // Context for ws
     var self = this;
     
-    ws.send(msg);
-    ws.onmessage = function(response){  
-      self.pushMessage(response.data);
-    }    
+    ws.send(msg); // отвравить
+
+    ws.onmessage = function(response){ 
+      // console.log(response.data); 
+      self.pushMessage(response.data, 0);
+    }   // принять
   },
 
-  pushMessage: function(msg) {
-    this.state.id = 23132;
-    this.state.name = "Джон";
-    this.state.message = msg;
-    view.showMessage(this.state);
-  }  
+  pushMessage: function(msg, ho) {
+    var el = document.getElementById("scrollbar");
+    if(msg === null) {
+      el.innerText = "";
+      return;
+    }
+
+    if(ho === 1) {
+      console.log("MSG CLICK: ", msg)
+      this.state.id = msg._idFrom;
+      this.state.name = msg.name;
+      this.state.message = msg.msg;
+      this.state.image = msg.img;
+      view.showMessage(this.state);
+      return;
+    }
+
+    if(ho === 0) {
+      this.state.id = 23132;
+      this.state.name = "Джон";
+      this.state.message = msg;
+      this.state.image = 'user.jpg';
+      view.showMessage(this.state);
+      return;
+    }
+
+    
+  }
 };
 
 
@@ -75,6 +100,8 @@ var controller = {
   var app = {
 
     init: function(){
+
+     
      
       var ws = this.wsInit();
       
@@ -85,8 +112,7 @@ var controller = {
       var ws = new WebSocket('wss://echo.websocket.org');
 
       ws.onopen = function(){
-        var i = 0;
-        console.log("Connect...", i++)
+        console.log("Connect...")
       };
 
       ws.onclose = function(){
@@ -100,46 +126,87 @@ var controller = {
 
  
 
-    event: function(ws){
-      var elInput = document.getElementById("input");
-      var elForm = document.getElementById("form-input-main");  
+    event: function(ws){      
+      
+      
+      window.addEventListener('load', () => {
+
+        var elForm = document.getElementById("form-input-main"); 
+        const elInput = document.getElementById("input");
+        const items = document.getElementsByClassName("side-nav__item");
+
+        var boxMsg = document.getElementById("scrollbar");
+
+        Array.from(items).forEach( item => {
+          item.addEventListener('click', (e) => {
+
+            var idUserFrom = e.target.getAttribute('data-id');
+
+            var attrInput = elInput.getAttribute('data-id');
+            if (idUserFrom !== attrInput) {
+              boxMsg.innerText = '';
+            }
+            
+            elInput.setAttribute('data-id', idUserFrom);
+
+            // model.pushMessage(null);
+
+            $.post( "test.php",{id: idUserFrom }, (data) => {
+              model.pushMessage(data, 1);
+              // boxMsg.innerText = `response: ${data.msg}`;
+            }, "json");
+
+          });
+        });
+
+
+        // Fake Message START
+        // =================
+
+        var data2 = {
+          "msg": "Нравится Это?. Еще через 10 с напишу))",
+          "name": "Джесика",
+          "img": 'user-2.jpg',
+          "_idFrom": 101,
+          "_idTo": 100
+        };
+
+        for(let i = 1; i < 3; i++){
+          
+          setTimeout(()=>{
+            model.pushMessage(data2, 1);
+          },10000 * i)
+
+        }
+       
+        // Fake Message START
+        // =================
+
+        elForm.addEventListener('submit', function(event){
+          event.preventDefault();        
    
-     
-      
-      
-      elForm.addEventListener('submit', function(event){
-        event.preventDefault();        
-        
-       
-        
-        controller.sendMessage(elInput.value, ws);
-        
-        
-
-        elInput.value = '';
-       
-
-
-        // var http = new XMLHttpRequest();
-        // var url = 'http://192.168.100.11';
- 
-        // http.open('POST', url, true);
-
- 
-        // // http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-        // http.onreadystatechange = function() {
-        //     if(http.readyState == 4 && http.status == 200) {
-        //        console.log(http.responseText);
-        //     }
-        // }
-        // http.send(elInput.value);
+          controller.sendMessage(elInput.value, ws);
+  
+          elInput.value = '';
+  
+        });
 
       });
+   
+        
+        
+  
+
+      
+
+
+            
+
     }    
   };
 
   app.init();
+
 
 }());
 

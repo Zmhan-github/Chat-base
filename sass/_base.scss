@@ -39,15 +39,19 @@ $bp-small: 37.5em;    // 600px;
   box-sizing: inherit;
 }
 
+html, 
+body {
+  width: 100%;
+  height: 100%;
+}
+
 html {
   box-sizing: border-box;
   font-size: 62.5%; // 1rem = 10px; 10px/16px = 62.5%;
-  overflow:  hidden; 
 
 
   @media only screen and (max-width: $bp-small) {
     font-size: 52.25%;
-    overflow-x: scroll;
   }
 }
 
@@ -56,9 +60,7 @@ body {
   font-weight: 400;
   line-height: 1.6;
   color: var(--color-grey-dark-2);
-  // background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
-  // background-size: cover;
-  background-image: url(/img/fon.png);
-  background-repeat: repeat;
-  min-height: 100vh;
+  background-image: url('../img/grid.png');
+  background-repeat: repeat;  
+  overflow: hidden;
 }

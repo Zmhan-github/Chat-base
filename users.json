@@ -1,35 +1,42 @@
 [
   {
+    "_id": 101,
     "name":"Джесика",
     "images":"user-2.jpg",
     "status":"online"
   },
   {
-    "name":"Марат",
+    "_id": 102,
+    "name":"Dima",
     "images":"user-1.jpg",
     "status":"online"
   },
   {
+    "_id": 103,
     "name":"Тимур",
     "images":"user-3.jpg",
     "status": "online"
   },
   {
+    "_id": 104,
     "name":"Осман",
     "images":"user-4.jpg",
     "status":"online"
   },
   {
+    "_id": 105,
     "name":"Аврора",
     "images":"user-5.jpg",
     "status": "online"
   },
   {
+    "_id": 106,
     "name":"Воланд",
     "images":"user-5.jpg",
     "status": "online"
   },
   {
+    "_id": 107,
     "name":"Мастер",
     "images":"user-5.jpg",
     "status": "online"
